@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Registration Form & WhatsApp Integration
     const registrationForm = document.getElementById('noorIftarSeriesForm');
-    const WHATSAPP_NUMBER = '917012531842';
+    const WHATSAPP_NUMBER = '917025541784';
 
     registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
