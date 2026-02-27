@@ -473,12 +473,14 @@ h3,
 }
 
 .gallery-item {
+    display: block;
     border-radius: 20px;
     overflow: hidden;
     aspect-ratio: 1/1;
     border: 1px solid var(--glass-border);
     transition: var(--transition);
     position: relative;
+    cursor: zoom-in;
 }
 
 .gallery-item img {
