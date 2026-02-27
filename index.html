@@ -55,9 +55,9 @@
             </div>
             <div class="hero-visual">
                 <div class="visual-stack">
-                    <img src="assets/cover-page.jpg" alt="Iftar Cover" class="hero-img main">
-                    <img src="assets/package-1.jpg" alt="Iftar Package 1" class="hero-img sub">
-                    <img src="assets/package-2.jpg" alt="Iftar Package 2" class="hero-img back">
+                    <img src="assets/cover-page.jpeg" alt="Iftar Cover" class="hero-img main">
+                    <img src="assets/package-1.jpeg" alt="Iftar Package 1" class="hero-img sub">
+                    <img src="assets/package-2.jpeg" alt="Iftar Package 2" class="hero-img back">
                 </div>
             </div>
         </div>
@@ -99,12 +99,12 @@
         <div class="container">
             <h2 class="section-title">Pre-Events Gallery</h2>
             <div class="gallery-grid">
-                <a href="image-viewer.html?img=assets/cover-page.jpg" class="gallery-item"><img
-                        src="assets/cover-page.jpg" alt="Iftar Cover"></a>
-                <a href="image-viewer.html?img=assets/package-1.jpg" class="gallery-item"><img
-                        src="assets/package-1.jpg" alt="Iftar Package"></a>
-                <a href="image-viewer.html?img=assets/package-2.jpg" class="gallery-item"><img
-                        src="assets/package-2.jpg" alt="Iftar Package"></a>
+                <a href="image-viewer.html?img=assets/cover-page.jpeg" class="gallery-item"><img
+                        src="assets/cover-page.jpeg" alt="Iftar Cover"></a>
+                <a href="image-viewer.html?img=assets/package-1.jpeg" class="gallery-item"><img
+                        src="assets/package-1.jpeg" alt="Iftar Package"></a>
+                <a href="image-viewer.html?img=assets/package-2.jpeg" class="gallery-item"><img
+                        src="assets/package-2.jpeg" alt="Iftar Package"></a>
                 <a href="image-viewer.html?img=assets/img-3.jpeg" class="gallery-item"><img src="assets/img-3.jpeg"
                         alt="Iftar Gallery"></a>
                 <a href="image-viewer.html?img=assets/img-4.jpeg" class="gallery-item"><img src="assets/img-4.jpeg"
@@ -192,6 +192,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="package">Select Package</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-box-open"></i>
+                            <select id="package" name="package" required>
+                                <option value="" disabled selected>Choose a package</option>
+                                <option value="399">Package - 399 (Min. 30 Persons)</option>
+                                <option value="599">Package - 599</option>
+                                <option value="899">Package - 899</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="message">Optional Message</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-comment-dots"></i>
@@ -262,6 +275,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/916383360375" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>Chat with Us</span>
+    </a>
 
     <!-- Custom JS -->
     <script src="script.js"></script>

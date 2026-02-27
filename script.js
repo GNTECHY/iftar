@@ -33,6 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Registration Form & WhatsApp Integration
     const registrationForm = document.getElementById('noorIftarSeriesForm');
     const WHATSAPP_NUMBER = '916383360375';
+    const attendeesInput = document.getElementById('attendees');
+    const packageSelect = document.getElementById('package');
+    const package399Option = packageSelect.querySelector('option[value="399"]');
+
+    // Real-time Package Validation
+    const updatePackageOptions = () => {
+        const attendeesCount = parseInt(attendeesInput.value) || 0;
+        if (attendeesCount < 30) {
+            package399Option.disabled = true;
+            if (packageSelect.value === '399') {
+                packageSelect.value = ''; // Reset selection if it's now invalid
+            }
+        } else {
+            package399Option.disabled = false;
+        }
+    };
+
+    attendeesInput.addEventListener('input', updatePackageOptions);
+    updatePackageOptions(); // Initial check
 
     registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -42,15 +61,23 @@ document.addEventListener('DOMContentLoaded', () => {
             name: formData.get('fullName'),
             phone: formData.get('phoneNumber'),
             email: formData.get('email'),
-            attendees: formData.get('attendees'),
+            package: formData.get('package'),
+            attendees: parseInt(formData.get('attendees')),
             message: formData.get('message') || 'No additional message'
         };
+
+        // Final Validation (Double check)
+        if (data.package === '399' && data.attendees < 30) {
+            alert('The 399 package is only available for groups of 30 or more attendees.');
+            return;
+        }
 
         // Construct WhatsApp Message
         const message = `*Noor Iftar Series Registration*%0A%0A` +
             `*Name:* ${data.name}%0A` +
             `*Phone:* ${data.phone}%0A` +
             `*Email:* ${data.email}%0A` +
+            `*Package:* ${data.package}%0A` +
             `*Attendees:* ${data.attendees}%0A` +
             `*Message:* ${data.message}`;
 
@@ -64,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset form
         registrationForm.reset();
+        updatePackageOptions(); // Reset package availability
     });
 
     // Intersection Observer for Reveal Animations
