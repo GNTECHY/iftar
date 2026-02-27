@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Image | Noor Iftar Series</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0A192F;
+            --secondary: #112240;
+            --accent: #D4AF37;
+            --text: #F8F8F8;
+            --glass: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .viewer-header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            background: var(--glass);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        .viewer-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, #112240, #0A192F);
+        }
+
+        .image-container {
+            max-width: 1000px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .viewer-header {
+                padding: 1rem;
+            }
+
+            .viewer-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="viewer-header">
+        <a href="index.html#gallery" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Gallery
+        </a>
+        <h2 style="font-family: 'El Messiri', sans-serif; color: var(--accent);">Noor Iftar Series</h2>
+    </header>
+
+    <main class="viewer-content">
+        <div class="image-container">
+            <img id="fullImage" src="" alt="Full View">
+        </div>
+    </main>
+
+    <script>
+        // Load image from URL parameter
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const imgSrc = urlParams.get('img');
+            const imgElement = document.getElementById('fullImage');
+
+            if (imgSrc) {
+                imgElement.src = imgSrc;
+            } else {
+                // Fallback if no image specified
+                window.location.href = 'index.html';
+            }
+        };
+    </script>
+</body>
+
+</html>
