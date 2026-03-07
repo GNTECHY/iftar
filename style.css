@@ -110,8 +110,8 @@ h3,
 }
 
 .logo img {
-    height: 50px;
-    /* Standard navbar height */
+    height: 70px;
+    /* Increased from 50px */
     width: auto;
     object-fit: contain;
 }
@@ -264,6 +264,22 @@ h3,
     z-index: 2;
 }
 
+.hero-logo {
+    display: block;
+    max-width: 450px;
+    height: auto;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+@media (max-width: 768px) {
+    .hero-logo {
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 .badge {
     color: var(--accent);
     text-transform: uppercase;
@@ -376,10 +392,8 @@ h3,
 }
 
 .section-title::before {
-    content: '\f66c';
-    /* Mosque icon from Font Awesome */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
+    content: '';
+    /* Removed Font Awesome icon to avoid loading issues */
     position: absolute;
     top: -40px;
     left: 50%;
