@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Image | Noor Iftar Series</title>
+    <title>View Media | Noor Iftar Series</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,16 +43,16 @@
         }
 
         .viewer-header {
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 25, 47, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
         }
 
         .back-link {
@@ -85,34 +85,64 @@
             background: radial-gradient(circle at center, #112240, #0A192F);
         }
 
-        .image-container {
-            max-width: 1000px;
+        .media-container {
+            max-width: 1200px;
             width: 100%;
-            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000;
             animation: fadeIn 0.8s ease-out;
         }
 
-        .image-container img {
-            width: 100%;
-            height: auto;
+        .media-container img,
+        .media-container video {
+            max-width: 100%;
+            max-height: 80vh;
             display: block;
-            object-fit: contain;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: scale(0.98);
             }
 
             to {
                 opacity: 1;
                 transform: scale(1);
             }
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #20ba59;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+            color: white;
         }
 
         @media (max-width: 768px) {
@@ -122,6 +152,17 @@
 
             .viewer-content {
                 padding: 1rem;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px;
+                border-radius: 50%;
+            }
+
+            .whatsapp-float span {
+                display: none;
             }
         }
     </style>
@@ -136,31 +177,37 @@
     </header>
 
     <main class="viewer-content">
-        <div class="image-container">
-            <img id="fullImage" src="" alt="Full View">
+        <div id="mediaTarget" class="media-container">
+            <!-- Dynamic Media Content -->
         </div>
     </main>
 
-    <script>
-        // Load image from URL parameter
-        window.onload = function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const imgSrc = urlParams.get('img');
-            const imgElement = document.getElementById('fullImage');
-
-            if (imgSrc) {
-                imgElement.src = imgSrc;
-            } else {
-                // Fallback if no image specified
-                window.location.href = 'index.html';
-            }
-        };
-    </script>
-    <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/916383360375" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
         <span>Chat with Us</span>
     </a>
+
+    <script>
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mediaSrc = urlParams.get('img') || urlParams.get('vid');
+            const target = document.getElementById('mediaTarget');
+
+            if (!mediaSrc) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const extension = mediaSrc.split('.').pop().toLowerCase();
+            const videoExtensions = ['mp4', 'webm', 'ogg'];
+
+            if (videoExtensions.includes(extension)) {
+                target.innerHTML = `<video src="${mediaSrc}" controls autoplay loop></video>`;
+            } else {
+                target.innerHTML = `<img src="${mediaSrc}" alt="Event Photo">`;
+            }
+        };
+    </script>
 </body>
 
 </html>
