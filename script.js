@@ -53,6 +53,63 @@ document.addEventListener('DOMContentLoaded', () => {
     attendeesInput.addEventListener('input', updatePackageOptions);
     updatePackageOptions(); // Initial check
 
+    // Custom Date Grid Logic
+    const dateGrid = document.getElementById('dateGrid');
+    const hiddenDateInput = document.getElementById('eventDate');
+    const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+
+    const generateDateGrid = () => {
+        if (!dateGrid) return;
+        dateGrid.innerHTML = ''; // Clear existing
+
+        const startDate = new Date(2026, 1, 19); // Feb 19 (Months are 0-indexed)
+        const endDate = new Date(2026, 2, 20);   // March 20
+        const availableStart = new Date(2026, 2, 14); // March 14
+
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        let currentDate = new Date(startDate);
+        let ramadanDay = 1;
+
+        while (currentDate <= endDate) {
+            const dateValue = new Date(currentDate);
+            const isAvailable = dateValue >= availableStart;
+            const dayName = daysOfWeek[dateValue.getDay()];
+            const dateNum = dateValue.getDate();
+            const monthName = dateValue.toLocaleString('default', { month: 'short' });
+            const fullDateString = `${dateValue.getFullYear()}-${String(dateValue.getMonth() + 1).padStart(2, '0')}-${String(dateNum).padStart(2, '0')}`;
+
+            const slot = document.createElement('div');
+            slot.className = `date-slot ${isAvailable ? 'available' : 'full'}`;
+
+            slot.innerHTML = `
+                <span class="ramadan-day">Day ${ramadanDay}</span>
+                <span class="slot-day">${dayName}</span>
+                <span class="slot-date">${dateNum} ${monthName}</span>
+            `;
+
+            if (isAvailable) {
+                slot.addEventListener('click', () => {
+                    document.querySelectorAll('.date-slot').forEach(s => s.classList.remove('active'));
+                    slot.classList.add('active');
+                    hiddenDateInput.value = fullDateString;
+                    selectedDateDisplay.textContent = `Selected: ${monthName} ${dateNum}, 2026 (Ramadan Day ${ramadanDay})`;
+                    selectedDateDisplay.style.color = '#e51e2b';
+                });
+            } else {
+                slot.title = "This date is fully booked";
+            }
+
+            dateGrid.appendChild(slot);
+
+            // Increment
+            currentDate.setDate(currentDate.getDate() + 1);
+            ramadanDay++;
+        }
+    };
+
+    generateDateGrid();
+
     registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 

@@ -658,10 +658,122 @@ h3,
     /* Better calendar picker icon for dark theme */
 }
 
-/* Date picker icon styling */
-.input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(0.8) sepia(1) saturate(5) hue-rotate(5deg);
+/* Custom Date Selector Grid */
+.date-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+.date-selector-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.date-selector-grid::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 10px;
+}
+
+.date-slot {
+    aspect-ratio: 1/1.2;
+    border-radius: 20px 20px 5px 5px;
+    /* Half-circle/seat shape */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    position: relative;
+}
+
+/* Status: Full/Past */
+.date-slot.full {
+    background: #4a4a4a;
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Status: Available */
+.date-slot.available {
+    background: #C5A028;
+    /* Deep Gold */
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.date-slot.available:hover {
+    transform: translateY(-5px);
+    background: var(--accent);
+}
+
+/* Status: Selected */
+.date-slot.active {
+    background: #e51e2b;
+    /* Vibrant Red */
+    color: white;
+    box-shadow: 0 10px 20px rgba(229, 30, 43, 0.4);
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.date-slot .slot-day {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.date-slot .slot-date {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+/* Ramadan Day Badge */
+.ramadan-day {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary);
+    color: var(--accent);
+    font-size: 0.6rem;
+    padding: 2px 5px;
+    border-radius: 10px;
+    border: 1px solid var(--accent);
+    font-weight: 700;
+}
+
+.selected-date-text {
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* Mobile adjustments for date grid */
+@media (max-width: 480px) {
+    .date-selector-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .date-slot .slot-date {
+        font-size: 1rem;
+    }
 }
 
 .input-wrapper select {
