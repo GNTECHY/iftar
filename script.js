@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             slot.innerHTML = `
                 <span class="ramadan-day">Day ${ramadanDay}</span>
                 <span class="slot-day">${dayName}</span>
-                <span class="slot-date">${dateNum} ${monthName}</span>
+                <span class="slot-date">${dateNum}</span>
             `;
 
             if (isAvailable) {
