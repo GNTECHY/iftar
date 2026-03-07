@@ -654,6 +654,14 @@ h3,
     font-family: inherit;
     transition: var(--transition);
     appearance: none;
+    color-scheme: dark;
+    /* Better calendar picker icon for dark theme */
+}
+
+/* Date picker icon styling */
+.input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8) sepia(1) saturate(5) hue-rotate(5deg);
+    cursor: pointer;
 }
 
 .input-wrapper select {

@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = {
             name: formData.get('fullName'),
             phone: formData.get('phoneNumber'),
+            date: formData.get('eventDate'),
             email: formData.get('email'),
             package: formData.get('package'),
             attendees: parseInt(formData.get('attendees')),
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Final Validation (Double check)
+
         if (data.package === '399' && data.attendees < 30) {
             alert('The 399 package is only available for groups of 30 or more attendees.');
             return;
@@ -75,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Construct WhatsApp Message
         const message = `*Noor Iftar Series Registration*%0A%0A` +
             `*Name:* ${data.name}%0A` +
+            `*Date:* ${data.date}%0A` +
             `*Phone:* ${data.phone}%0A` +
             `*Email:* ${data.email}%0A` +
             `*Package:* ${data.package}%0A` +
