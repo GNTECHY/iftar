@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const startDate = new Date(2026, 1, 19); // Feb 19 (Months are 0-indexed)
         const endDate = new Date(2026, 2, 20);   // March 20
-        const availableStart = new Date(2026, 2, 14); // March 14
-
+        const availableDates = [11, 12, 14, 16]; // Specific available dates in March
+        const availableMonth = 2; // March is 2 (0-indexed)
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         let currentDate = new Date(startDate);
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         while (currentDate <= endDate) {
             const dateValue = new Date(currentDate);
-            const isAvailable = dateValue >= availableStart;
+            const isAvailable = dateValue.getMonth() === availableMonth && availableDates.includes(dateValue.getDate());
             const dayName = daysOfWeek[dateValue.getDay()];
             const dateNum = dateValue.getDate();
             const monthName = dateValue.toLocaleString('default', { month: 'short' });
