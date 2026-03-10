@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const startDate = new Date(2026, 1, 19); // Feb 19 (Months are 0-indexed)
         const endDate = new Date(2026, 2, 20);   // March 20
-        const availableDates = [11, 12, 14, 16]; // Specific available dates in March
+        const availableDates = [11, 14, 16]; // Specific available dates in March
         const availableMonth = 2; // March is 2 (0-indexed)
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
